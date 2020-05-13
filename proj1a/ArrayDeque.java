@@ -46,15 +46,15 @@ public class ArrayDeque<T> {
 		if (isEmpty()) {
 			return null;
 		}
-		int index = head;
-		T returnItem = get(index);
 		double capLowBound = 0.25;
-		items[index] = null;
-		size -= 1;
 		double currentCapRatio = (double) size / items.length;
 		if ((items.length >= 16) & (currentCapRatio < capLowBound)) {
 			resizeArray(items.length / 2);
 		}
+		int index = head;
+		T returnItem = get(index);
+		items[index] = null;
+		size -= 1;
 		head = (head + 1) % items.length;
 		return returnItem;
 	}
@@ -62,15 +62,15 @@ public class ArrayDeque<T> {
 		if (isEmpty()) {
 			return null;
 		}
-		int index = (head + size - 1) % items.length;
-		T returnItem = get(index);
 		double capLowBound = 0.25;
-		items[index] = null;
-		size -= 1;
 		double currentCapRatio = (double) size / items.length;
 		if ((items.length >= 16) & (currentCapRatio < capLowBound)) {
 			resizeArray(items.length / 2);
 		}
+		int index = (head + size - 1) % items.length;
+		T returnItem = get(index);
+		items[index] = null;
+		size -= 1;
 		return returnItem;
 	}
 
@@ -107,22 +107,4 @@ public class ArrayDeque<T> {
 		}
 	}
 
-	public int capacity() {
-		return items.length;
-	}
-
-	public double ratio() {
-		return (double) size / items.length;
-	}
-
-	public void printArray() {
-		for (int i = 0; i < items.length; i++) {
-			if (i < items.length - 1) {
-				System.out.print(items[i] + " ");
-			}
-			else {
-				System.out.println(items[i]);
-			}
-		}
-	}
 }
