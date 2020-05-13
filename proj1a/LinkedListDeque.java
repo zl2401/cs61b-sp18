@@ -1,9 +1,8 @@
 public class LinkedListDeque<T> {
-
 	public class TNode {
-		public T item;
-		public TNode prev;
-		public TNode next;
+		private T item;
+		private TNode prev;
+		private TNode next;
 
 		public TNode(T i, TNode n, TNode p) {
 			item = i;
@@ -101,7 +100,7 @@ public class LinkedListDeque<T> {
 			return head.next.item;
 		}
 		else {
-			return get(index - 1);
+			return getRecursive(index - 1);
 		}
 	}
 }
