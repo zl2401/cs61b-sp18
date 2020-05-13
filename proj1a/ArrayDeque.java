@@ -12,8 +12,13 @@ public class ArrayDeque<T> {
 
 	private void resizeArray(int cap) {
 		T[] temp = (T[]) new Object[cap];
-		System.arraycopy(items, head, temp, 0, size - head);
-		System.arraycopy(items, 0, temp, size - head, head);
+		if (head + size < items.length) {
+			System.arraycopy(items, head, temp, 0, size);
+		}
+		else {
+			System.arraycopy(items, head, temp, 0, items.length - head);
+			System.arraycopy(items, 0, temp, items.length - head, head + size - items.length);
+		}
 		items = temp;
 		head = 0;
 	}
@@ -98,6 +103,25 @@ public class ArrayDeque<T> {
 			}
 			else {
 				System.out.println(items[index]);
+			}
+		}
+	}
+
+	public int capacity() {
+		return items.length;
+	}
+
+	public double ratio() {
+		return (double) size / items.length;
+	}
+
+	public void printArray() {
+		for (int i = 0; i < items.length; i++) {
+			if (i < items.length - 1) {
+				System.out.print(items[i] + " ");
+			}
+			else {
+				System.out.println(items[i]);
 			}
 		}
 	}

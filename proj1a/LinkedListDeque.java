@@ -9,6 +9,18 @@ public class LinkedListDeque<T> {
 			next = n;
 			prev = p;
 		}
+
+		public T getItem(int index) {
+			if (this == null) {
+				return null;
+			}
+			if (index == 0) {
+				return item;
+			}
+			else {
+				return this.next.getItem(index - 1);
+			}
+		}
 	}
 
 	private static int size;
@@ -96,11 +108,6 @@ public class LinkedListDeque<T> {
 		if (index >= size) {
 			return null;
 		}
-		if (index == 0) {
-			return head.next.item;
-		}
-		else {
-			return getRecursive(index - 1);
-		}
+		return head.next.getItem(index);
 	}
 }
