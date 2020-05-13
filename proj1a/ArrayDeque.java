@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
 		if (size == items.length) {
 			resizeArray(2 * size);
 		}
-		int index = (head - 1) % items.length;
+		int index = (head - 1 + items.length) % items.length;
 		items[index] = x;
 		size += 1;
 		head = index;
@@ -38,6 +38,9 @@ public class ArrayDeque<T> {
 	}
 
 	public T removeFirst() {
+		if (isEmpty()) {
+			return null;
+		}
 		int index = head;
 		T returnItem = get(index);
 		double capLowBound = 0.25;
@@ -51,6 +54,9 @@ public class ArrayDeque<T> {
 		return returnItem;
 	}
 	public T removeLast() {
+		if (isEmpty()) {
+			return null;
+		}
 		int index = (head + size - 1) % items.length;
 		T returnItem = get(index);
 		double capLowBound = 0.25;
@@ -82,5 +88,17 @@ public class ArrayDeque<T> {
 
 	public int size() {
 		return size;
+	}
+
+	public void printDeque() {
+		for (int i = 0; i < size; i++) {
+			int index = (head + i) % items.length;
+			if (i < size - 1) {
+				System.out.print(items[index] + " ");
+			}
+			else {
+				System.out.println(items[index]);
+			}
+		}
 	}
 }
