@@ -39,14 +39,14 @@ public class PercolationStats {
         double m = mean();
         double std = stddev();
         double twoSig = 1.96;
-        return m - twoSig * std / testTime;
+        return m - twoSig * std / Math.sqrt(testTime);
     }
 
     public double confidenceHigh() {
         double m = mean();
         double std = stddev();
         double twoSig = 1.96;
-        return m + twoSig * std / testTime;
+        return m + twoSig * std / Math.sqrt(testTime);
     }
 
     public static void main(String[] args) {

@@ -7,6 +7,7 @@ public class Percolation {
 
     private int side;
     private WeightedQuickUnionUF grid;
+    private WeightedQuickUnionUF gridHelper;
     private boolean[][] matrix;
     private int inNode;
     private int outNode;
@@ -14,11 +15,12 @@ public class Percolation {
 
     public Percolation(int N) {
         if (N <= 0) {
-            throw new IndexOutOfBoundsException();
+            throw new IllegalArgumentException();
         }
 
         this.side = N;
         this.grid = new WeightedQuickUnionUF(N * N + 2);
+        this.gridHelper = new WeightedQuickUnionUF(N * N + 1);
         this.matrix = new boolean[N][N];
         this.inNode = 0;
         this.outNode = N * N + 1;
@@ -62,6 +64,7 @@ public class Percolation {
         // if it is top particle, connect it with the inNode
         if (isTop(row, col)) {
             grid.union(index, inNode);
+            gridHelper.union(index, inNode);
         }
 
         // if it is bottom particle, connect it with the outNode
@@ -73,18 +76,22 @@ public class Percolation {
         if (row > 0 && isOpen(row - 1, col)) {
             int otherIndex = twoD2oneD(row - 1, col);
             grid.union(index, otherIndex);
+            gridHelper.union(index, otherIndex);
         }
         if (col > 0 && isOpen(row, col - 1)) {
             int otherIndex = twoD2oneD(row, col - 1);
             grid.union(index, otherIndex);
+            gridHelper.union(index, otherIndex);
         }
         if (col < side - 1 && isOpen(row, col + 1)) {
             int otherIndex = twoD2oneD(row, col + 1);
             grid.union(index, otherIndex);
+            gridHelper.union(index, otherIndex);
         }
         if (row < side - 1 && isOpen(row + 1, col)) {
             int otherIndex = twoD2oneD(row + 1, col);
             grid.union(index, otherIndex);
+            gridHelper.union(index, otherIndex);
         }
     }
 
@@ -102,7 +109,7 @@ public class Percolation {
         }
 
         int index = twoD2oneD(row, col);
-        return grid.connected(index, inNode);
+        return gridHelper.connected(index, inNode);
     }
 
     public int numberOfOpenSites() {
