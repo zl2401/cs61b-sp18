@@ -49,12 +49,5 @@ public class PercolationStats {
         return m + twoSig * std / Math.sqrt(testTime);
     }
 
-    public static void main(String[] args) {
-        int T = 5000;
-        PercolationFactory pf = new PercolationFactory();
-        int N = 20;
-
-        PercolationStats pcStats = new PercolationStats(N, T, pf);
-        System.out.println(pcStats.confidenceLow() + " and " + pcStats.confidenceHigh());
-    }
+    
 }
