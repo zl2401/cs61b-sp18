@@ -1,6 +1,5 @@
 package hw3.hash;
 
-import edu.princeton.cs.algs4.Complex;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -43,10 +42,13 @@ public class TestComplexOomage {
         List<Oomage> deadlyList = new ArrayList<>();
 
         // Your code here.
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 256; i++) {
             List<Integer> tempList = new ArrayList<>();
-            for (int j = 0; j < 2; j++) {
-                tempList.add(i * 10);
+            for (int j = 0; j < 4; j++) {
+                tempList.add(i);
+            }
+            for (int j = 0; j < 4; j++) {
+                tempList.add(j);
             }
             deadlyList.add(new ComplexOomage(tempList));
         }
